@@ -12,16 +12,21 @@ builder.Services.AddTransient<PokemonService>();
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
 app.MapGet("/pokemon/{id}", (int id, PokemonService pokemonService) => pokemonService.GetPokemonFull(id));
+app.MapGet("/pokemon/{id}/slim", (int id, PokemonService pokemonService) => pokemonService.GetPokemonSlim(id));
 
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.RoutePrefix = string.Empty; // Set the root route to Swagger
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
+    });
 }
+
 // test from vs code
 app.UseHttpsRedirection();
 

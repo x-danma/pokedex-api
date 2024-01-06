@@ -1,3 +1,4 @@
+
 class PokemonService
 {
     public PokemonService()
@@ -16,5 +17,14 @@ class PokemonService
         return json;
     }
 
-
+    internal async Task<string> GetPokemonSlim(int id)
+    {
+        var file = $"../../PokedexData/Pokemon/id/slim/{id}.json";
+        var json = await File.ReadAllTextAsync(file);
+        if (json == null)
+        {
+            return "pokemon not found";
+        }
+        return json;
+    }
 }
