@@ -7,13 +7,25 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// fix CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 
 builder.Services.AddTransient<PokemonService>();
 
 var app = builder.Build();
-
+// healty check
+app.MapGet("/healthy", () => "OK");
 app.MapGet("/pokemon/{id}", (int id, PokemonService pokemonService) => pokemonService.GetPokemonFull(id));
 app.MapGet("/pokemon/{id}/slim", (int id, PokemonService pokemonService) => pokemonService.GetPokemonSlim(id));
+
 
 
 // Configure the HTTP request pipeline.
@@ -27,7 +39,8 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// test from vs code
+// fix CORS
+app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
