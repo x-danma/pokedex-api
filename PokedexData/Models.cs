@@ -28,7 +28,7 @@ class Type
     public string Url { get; set; }
 }
 
-public class SlimPokemon
+public class PokemonSlim
 {
     public string Name { get; set; }
     public int Id { get; set; }

@@ -1,4 +1,5 @@
 
+
 class PokemonService
 {
     public PokemonService()
@@ -15,6 +16,18 @@ class PokemonService
             return "pokemon not found";
         }
         return json;
+    }
+
+    internal object GetAllPokemonSlim()
+    {
+        var files = Directory.GetFiles($"../../PokedexData/Pokemon/id/slim/");
+        var pokemonJsons = new List<string>();
+        foreach (var file in files)
+        {
+            var json = File.ReadAllText(file);
+            pokemonJsons.Add(json);
+        }
+        return pokemonJsons;
     }
 
     internal async Task<string> GetPokemonSlim(int id)
