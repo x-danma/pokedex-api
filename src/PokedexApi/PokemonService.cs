@@ -18,16 +18,11 @@ class PokemonService
         return json;
     }
 
-    internal object GetAllPokemonSlim()
+    internal async Task<string> GetAllPokemonSlim()
     {
-        var files = Directory.GetFiles($"../../PokedexData/Pokemon/id/slim/");
-        var pokemonJsons = new List<string>();
-        foreach (var file in files)
-        {
-            var json = File.ReadAllText(file);
-            pokemonJsons.Add(json);
-        }
-        return pokemonJsons;
+        var file = $"../../PokedexData/Pokemon/all/slim/all-slim.json";
+        var json = await File.ReadAllTextAsync(file);
+        return json;
     }
 
     internal async Task<string> GetPokemonSlim(int id)
