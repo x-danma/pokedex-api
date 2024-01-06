@@ -7,7 +7,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddTransient<PokemonService>();
+
 var app = builder.Build();
+
+app.MapGet("/", () => "Hello World!");
+app.MapGet("/pokemon/{id}", (int id, PokemonService pokemonService) => pokemonService.GetPokemonFull(id));
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
