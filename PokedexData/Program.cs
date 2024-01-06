@@ -6,9 +6,9 @@ using PokedexApi.Models;
 Console.WriteLine("Hello, World!");
 
 
-// foreach pokemon slim in ./Pokemon/id/slim, populate ./Pokemon/id/full as a json array of all pokemon
+// // foreach pokemon slim in ./Pokemon/id/slim, populate ./Pokemon/id/full as a json array of all pokemon
 
-// use a default serializer
+// // use a default serializer
 // var options = new JsonSerializerOptions
 // {
 //     PropertyNameCaseInsensitive = true,
@@ -31,6 +31,8 @@ Console.WriteLine("Hello, World!");
 //     pokemonSlims.Add(pokemonSlim);
 //     Console.WriteLine($"added {pokemonSlim.Name} to pokemonSlims");
 // }
+// // sort by id
+// pokemonSlims.Sort((a, b) => a.Id.CompareTo(b.Id));
 // // and save list to ./Pokemon/all/slim/all-slim.json
 // var slimJson = JsonSerializer.Serialize(pokemonSlims, options);
 // File.WriteAllText("./Pokemon/all/slim/all-slim.json", slimJson);
